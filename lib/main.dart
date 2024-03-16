@@ -324,13 +324,23 @@ class GameParty extends State<GameScreen> {
 
   Color getSquareColor(int row, int col) {
     // print(counterForDrawOneSquare);
-    counterForDrawOneSquare++;
+    // counterForDrawOneSquare++;
     // print(counterForDrawOneSquare);
     // Color? color = selectedPoints.entries.firstWhere((element) => listEquals(element.key, [row, col])).value;
-    if (selectedPoints['$row, $col'] == p1.getPlayerColor()) {
-      return p1.getPlayerColor();
-    } else if (selectedPoints['$row, $col'] == p2.getPlayerColor()) {
-      return p2.getPlayerColor();
+    if (checkSquareFormation(row, col, p1)) {
+      // selectedPoints['$row, $col'] == p1.getPlayerColor()) {
+      // counterForDrawOneSquare++;
+      if (counterForDrawOneSquare == 0) {
+        counterForDrawOneSquare++;
+        return p1.getPlayerColor();
+      }
+    } else if (checkSquareFormation(row, col, p2)) {
+      // selectedPoints['$row, $col'] == p2.getPlayerColor()) {
+      // counterForDrawOneSquare++;
+      if (counterForDrawOneSquare == 0) {
+        counterForDrawOneSquare++;
+        return p2.getPlayerColor();
+      }
     }
     return Colors.transparent;
   }
@@ -386,28 +396,29 @@ class GameParty extends State<GameScreen> {
                                   border: Border.all(
                                       color: getBorderColor(row, col))),
                             ),
-                            if (counterForDrawOneSquare == 0)
-                              if (checkSquareFormation(row, col, p2))
-                                Positioned.fill(
-                                    child: CustomPaint(
-                                  painter: LinkPainter(
-                                    // row: row,
-                                    // col: col,
-                                    point: point,
-                                    color: getSquareColor(row, col),
-                                  ),
-                                ))
-                              else if (checkSquareFormation(row, col, p1))
-                                // if (counterForDrawOneSquare == 0)
-                                Positioned.fill(
-                                    child: CustomPaint(
-                                  painter: LinkPainter(
-                                    // row: row,
-                                    // col: col,
-                                    point: point,
-                                    color: getSquareColor(row, col),
-                                  ),
-                                ))
+                            // if (counterForDrawOneSquare == 0)
+                            // if (checkSquareFormation(row, col, p2))
+                            Positioned.fill(
+                                child: CustomPaint(
+                              painter: LinkPainter(
+                                // row: row,
+                                // col: col,
+                                point: point,
+                                // color: Colors.transparent
+                                color: getSquareColor(row, col),
+                              ),
+                            ))
+                            // else if (checkSquareFormation(row, col, p1))
+                            //   // if (counterForDrawOneSquare == 0)
+                            //   Positioned.fill(
+                            //       child: CustomPaint(
+                            //     painter: LinkPainter(
+                            //       // row: row,
+                            //       // col: col,
+                            //       point: point,
+                            //       color: getSquareColor(row, col),
+                            //     ),
+                            //   ))
                           ])),
                     ),
                 ],
