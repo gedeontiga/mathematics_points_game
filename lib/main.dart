@@ -31,22 +31,21 @@ class GameParty extends State<GameScreen> {
   int _player2Score = 0;
   // List<Offset> points = [];
   Offset point = Offset.zero;
-  final int _nbrePoints = 5;
-  int counterForDrawOneSquare = 0;
+  final int _nbrePoints = 8;
+  // int counterForDrawOneSquare = 0;
   // int selectedRow = -1;
   // int selectedCol = -1;
 
-  Player p1 = Player(1, 0, Colors.amber);
-  Player p2 = Player(2, 0, const Color.fromRGBO(235, 52, 36, 1.0));
+  Player p1 = Player(1, 0, const Color.fromARGB(255, 0, 79, 182));
+  Player p2 = Player(2, 0, const Color.fromARGB(255, 227, 19, 0));
 
   void selectPoint(int row, int col) {
     setState(() {
-      counterForDrawOneSquare = 0;
-      // Color? color = selectedPoints.entries.firstWhere((element) => listEquals(element.key, [row, col])).value;
       if (selectedPoints['$row, $col'] == Colors.transparent) {
         if (_currentPlayer == p1.getPlayerId()) {
           selectedPoints['$row, $col'] = p1.getPlayerColor();
           bool squareFormed = checkSquareFormation(row, col, p1);
+          // print(counterForDrawOneSquare);
           if (squareFormed) {
             _currentPlayer == p1.getPlayerId();
             _player1Score++;
@@ -55,6 +54,7 @@ class GameParty extends State<GameScreen> {
             _currentPlayer = p2.getPlayerId();
           }
         } else /*if (_currentPlayer == p2.getPlayerId())*/ {
+          // print(counterForDrawOneSquare);
           selectedPoints['$row, $col'] = p2.getPlayerColor();
           bool squareFormed = checkSquareFormation(row, col, p2);
           if (squareFormed) {
@@ -83,14 +83,6 @@ class GameParty extends State<GameScreen> {
         int newCol = col - 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
         // print(point);
-        // Offset topLeft = Offset((row - 1) * 1.0, (col - 1) * 1.0);
-        // Offset topRight = Offset((row - 1) * 1.0, col * 1.0);
-        // Offset bottomLeft = Offset((row) * 1.0, col * 1.0);
-        // Offset bottomRight = Offset((row) * 1.0, (col - 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
         return true;
       } else if (selectedPoints['$row, $col'] == player.getPlayerColor() &&
           selectedPoints['${row + 1}, $col'] == player.getPlayerColor() &&
@@ -99,14 +91,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row;
         int newCol = col - 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row) * 1.0, (col - 1) * 1.0);
-        // Offset topRight = Offset(row * 1.0, col * 1.0);
-        // Offset bottomLeft = Offset((row + 1) * 1.0, (col - 1) * 1.0);
-        // Offset bottomRight = Offset((row + 1) * 1.0, (col) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       } else if (selectedPoints['$row, $col'] == player.getPlayerColor() &&
           selectedPoints['${row - 1}, $col'] == player.getPlayerColor() &&
@@ -115,20 +100,14 @@ class GameParty extends State<GameScreen> {
         int newRow = row - 1;
         int newCol = col;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row - 1) * 1.0, (col) * 1.0);
-        // Offset topRight = Offset((row - 1) * 1.0, (col + 1) * 1.0);
-        // Offset bottomLeft = Offset((row) * 1.0, (col) * 1.0);
-        // Offset bottomRight = Offset((row) * 1.0, (col + 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       } else if (selectedPoints['$row, $col'] == player.getPlayerColor() &&
           selectedPoints['${row + 1}, $col'] == player.getPlayerColor() &&
           selectedPoints['$row, ${col + 1}'] == player.getPlayerColor() &&
           selectedPoints['${row + 1}, ${col + 1}'] == player.getPlayerColor()) {
         point = Offset(row * 1.0, col * 1.0);
+        // print(point);
         return true;
       }
     } else if (row == 0 && (col > 0 && col < selectedPoints.length - 1)) {
@@ -139,14 +118,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row;
         int newCol = col - 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row) * 1.0, (col - 1) * 1.0);
-        // Offset topRight = Offset(row * 1.0, col * 1.0);
-        // Offset bottomLeft = Offset((row + 1) * 1.0, (col - 1) * 1.0);
-        // Offset bottomRight = Offset((row + 1) * 1.0, (col) * 1.0);
-        // points.add(topLeft);
-        // points.add(bottomLeft);
-        // points.add(topRight);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
       if (selectedPoints['$row, $col'] == player.getPlayerColor() &&
@@ -156,14 +128,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row;
         int newCol = col + 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row) * 1.0, (col - 1) * 1.0);
-        // Offset topRight = Offset(row * 1.0, col * 1.0);
-        // Offset bottomLeft = Offset((row + 1) * 1.0, (col - 1) * 1.0);
-        // Offset bottomRight = Offset((row + 1) * 1.0, (col) * 1.0);
-        // points.add(topLeft);
-        // points.add(bottomLeft);
-        // points.add(topRight);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
     } else if ((row > 0 && row < selectedPoints.length - 1) && col == 0) {
@@ -174,14 +139,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row - 1;
         int newCol = col;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row - 1) * 1.0, (col) * 1.0);
-        // Offset topRight = Offset((row - 1) * 1.0, (col + 1) * 1.0);
-        // Offset bottomLeft = Offset((row) * 1.0, (col) * 1.0);
-        // Offset bottomRight = Offset((row) * 1.0, (col + 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
       if (selectedPoints['$row, $col'] == player.getPlayerColor() &&
@@ -191,14 +149,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row;
         int newCol = col;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row - 1) * 1.0, (col) * 1.0);
-        // Offset topRight = Offset((row - 1) * 1.0, (col + 1) * 1.0);
-        // Offset bottomLeft = Offset((row) * 1.0, (col) * 1.0);
-        // Offset bottomRight = Offset((row) * 1.0, (col + 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
     } else if (row == (selectedPoints.length - 1) &&
@@ -210,14 +161,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row - 1;
         int newCol = col - 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row) * 1.0, (col - 1) * 1.0);
-        // Offset topRight = Offset(row * 1.0, col * 1.0);
-        // Offset bottomLeft = Offset((row + 1) * 1.0, (col - 1) * 1.0);
-        // Offset bottomRight = Offset((row + 1) * 1.0, (col) * 1.0);
-        // points.add(topLeft);
-        // points.add(bottomLeft);
-        // points.add(topRight);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
       if (selectedPoints['$row, $col'] == player.getPlayerColor() &&
@@ -227,14 +171,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row - 1;
         int newCol = col;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row) * 1.0, (col - 1) * 1.0);
-        // Offset topRight = Offset(row * 1.0, col * 1.0);
-        // Offset bottomLeft = Offset((row + 1) * 1.0, (col - 1) * 1.0);
-        // Offset bottomRight = Offset((row + 1) * 1.0, (col) * 1.0);
-        // points.add(topLeft);
-        // points.add(bottomLeft);
-        // points.add(topRight);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
     } else if ((row > 0 && row < selectedPoints.length - 1) &&
@@ -246,14 +183,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row - 1;
         int newCol = col - 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row - 1) * 1.0, (col) * 1.0);
-        // Offset topRight = Offset((row - 1) * 1.0, (col + 1) * 1.0);
-        // Offset bottomLeft = Offset((row) * 1.0, (col) * 1.0);
-        // Offset bottomRight = Offset((row) * 1.0, (col + 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
       if (selectedPoints['$row, $col'] == player.getPlayerColor() &&
@@ -263,14 +193,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row;
         int newCol = col - 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row - 1) * 1.0, (col) * 1.0);
-        // Offset topRight = Offset((row - 1) * 1.0, (col + 1) * 1.0);
-        // Offset bottomLeft = Offset((row) * 1.0, (col) * 1.0);
-        // Offset bottomRight = Offset((row) * 1.0, (col + 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
     } else if (row == 0 && col == 0) {
@@ -279,14 +202,7 @@ class GameParty extends State<GameScreen> {
           selectedPoints['$row, ${col + 1}'] == player.getPlayerColor() &&
           selectedPoints['${row + 1}, ${col + 1}'] == player.getPlayerColor()) {
         point = Offset(row * 1.0, col * 1.0);
-        // Offset topLeft = Offset((row) * 1.0, (col) * 1.0);
-        // Offset topRight = Offset((row) * 1.0, (col + 1) * 1.0);
-        // Offset bottomLeft = Offset((row + 1) * 1.0, (col) * 1.0);
-        // Offset bottomRight = Offset((row + 1) * 1.0, (col + 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
     } else if (row == (selectedPoints.length - 1) &&
@@ -298,14 +214,7 @@ class GameParty extends State<GameScreen> {
         int newRow = row - 1;
         int newCol = col - 1;
         point = Offset(newRow * 1.0, newCol * 1.0);
-        // Offset topLeft = Offset((row - 1) * 1.0, (col - 1) * 1.0);
-        // Offset topRight = Offset((row - 1) * 1.0, col * 1.0);
-        // Offset bottomLeft = Offset((row) * 1.0, col * 1.0);
-        // Offset bottomRight = Offset((row) * 1.0, (col - 1) * 1.0);
-        // points.add(topLeft);
-        // points.add(topRight);
-        // points.add(bottomLeft);
-        // points.add(bottomRight);
+        // print(point);
         return true;
       }
     }
@@ -323,22 +232,16 @@ class GameParty extends State<GameScreen> {
   }
 
   Color getSquareColor(int row, int col) {
-    // print(counterForDrawOneSquare);
-    // counterForDrawOneSquare++;
-    // print(counterForDrawOneSquare);
-    // Color? color = selectedPoints.entries.firstWhere((element) => listEquals(element.key, [row, col])).value;
-    if (checkSquareFormation(row, col, p1)) {
-      // selectedPoints['$row, $col'] == p1.getPlayerColor()) {
-      // counterForDrawOneSquare++;
-      if (counterForDrawOneSquare == 0) {
-        counterForDrawOneSquare++;
+    if (checkSquareFormation(row, col, p1) == true) {
+      // print('hello');
+      if (row == point.dx.toInt() && col == point.dy.toInt()) {
+        // print(p1.getPlayerColor().toString());
         return p1.getPlayerColor();
       }
-    } else if (checkSquareFormation(row, col, p2)) {
-      // selectedPoints['$row, $col'] == p2.getPlayerColor()) {
-      // counterForDrawOneSquare++;
-      if (counterForDrawOneSquare == 0) {
-        counterForDrawOneSquare++;
+    } if (checkSquareFormation(row, col, p2) == true) {
+      // print('goodbye');
+      if (row == point.dx.toInt() && col == point.dy.toInt()) {
+        // print(p2.getPlayerColor().toString());
         return p2.getPlayerColor();
       }
     }
@@ -416,7 +319,7 @@ class GameParty extends State<GameScreen> {
                             //       // row: row,
                             //       // col: col,
                             //       point: point,
-                            //       color: getSquareColor(row, col),
+                            //       color: getSquareColor(point.dx.toInt(), point.dy.toInt()),
                             //     ),
                             //   ))
                           ])),
@@ -499,26 +402,65 @@ Map<String, Color> selectedPoints = {
   '0, 2': Colors.transparent,
   '0, 3': Colors.transparent,
   '0, 4': Colors.transparent,
+  '0, 5': Colors.transparent,
+  '0, 6': Colors.transparent,
+  '0, 7': Colors.transparent,
   '1, 0': Colors.transparent,
   '1, 1': Colors.transparent,
   '1, 2': Colors.transparent,
   '1, 3': Colors.transparent,
   '1, 4': Colors.transparent,
+  '1, 5': Colors.transparent,
+  '1, 6': Colors.transparent,
+  '1, 7': Colors.transparent,
   '2, 0': Colors.transparent,
   '2, 1': Colors.transparent,
   '2, 2': Colors.transparent,
   '2, 3': Colors.transparent,
   '2, 4': Colors.transparent,
+  '2, 5': Colors.transparent,
+  '2, 6': Colors.transparent,
+  '2, 7': Colors.transparent,
   '3, 0': Colors.transparent,
   '3, 1': Colors.transparent,
   '3, 2': Colors.transparent,
   '3, 3': Colors.transparent,
   '3, 4': Colors.transparent,
+  '3, 5': Colors.transparent,
+  '3, 6': Colors.transparent,
+  '3, 7': Colors.transparent,
   '4, 0': Colors.transparent,
   '4, 1': Colors.transparent,
   '4, 2': Colors.transparent,
   '4, 3': Colors.transparent,
-  '4, 4': Colors.transparent
+  '4, 4': Colors.transparent,
+  '4, 5': Colors.transparent,
+  '4, 6': Colors.transparent,
+  '4, 7': Colors.transparent,
+  '5, 0': Colors.transparent,
+  '5, 1': Colors.transparent,
+  '5, 2': Colors.transparent,
+  '5, 3': Colors.transparent,
+  '5, 4': Colors.transparent,
+  '5, 5': Colors.transparent,
+  '5, 6': Colors.transparent,
+  '5, 7': Colors.transparent,
+  '6, 0': Colors.transparent,
+  '6, 1': Colors.transparent,
+  '6, 2': Colors.transparent,
+  '6, 3': Colors.transparent,
+  '6, 4': Colors.transparent,
+  '6, 5': Colors.transparent,
+  '6, 6': Colors.transparent,
+  '6, 7': Colors.transparent,
+  '7, 0': Colors.transparent,
+  '7, 1': Colors.transparent,
+  '7, 2': Colors.transparent,
+  '7, 3': Colors.transparent,
+  '7, 4': Colors.transparent,
+  '7, 5': Colors.transparent,
+  '7, 6': Colors.transparent,
+  '7, 7': Colors.transparent
 };
 
 //Flutter shortcuts
